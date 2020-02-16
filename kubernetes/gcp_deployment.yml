@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scrumprojectservice-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scrumprojectservice-deployment
+  template:
+    metadata:
+      labels:
+        app: scrumprojectservice-deployment
+    spec:
+      containers:
+      - name: scrumprojectservice-deployment
+        image: ${IMAGE}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP
