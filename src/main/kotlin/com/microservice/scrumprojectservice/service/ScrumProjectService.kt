@@ -17,5 +17,28 @@ class ScrumProjectService {
 
         val savedScrumProject = scrumProjectRepository.save(newScrumProject)
         return Message(true, savedScrumProject)
+}
+
+    fun updateScrumProject(updateScrumProject: ScrumProject): Message {
+        val oldProjectOption = scrumProjectRepository.findById(updateScrumProject.id!!)
+        if (oldProjectOption.isPresent) {
+            val oldProject = oldProjectOption.get()
+            when {
+                updateScrumProject.projectName != null -> oldProject.projectName = updateScrumProject.projectName
+                updateScrumProject.teamId != null -> oldProject.teamId = updateScrumProject.teamId
+                updateScrumProject.colTitle != null -> oldProject.colTitle = updateScrumProject.colTitle
+                updateScrumProject.rowTitle != null -> oldProject.rowTitle = updateScrumProject.rowTitle
+                updateScrumProject.iteration != null -> oldProject.iteration = updateScrumProject.iteration
+            }
+            val savedScrumProject = scrumProjectRepository.save(oldProject)
+            return Message(true, savedScrumProject)
+
+        }
+        return Message(false, "no this project")
+    }
+
+    fun removeScrumProject(projectId: Int): Message {
+        scrumProjectRepository.deleteById(projectId)
+        return Message(true, "project remove success")
     }
 }

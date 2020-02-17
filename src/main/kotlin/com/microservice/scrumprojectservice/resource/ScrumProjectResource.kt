@@ -32,4 +32,26 @@ class ScrumProjectResource {
 
         return scrumProjectService.createScrumProject(newScrumProject)
     }
+
+    @PostMapping("/scrum_project/update")
+    fun updateScrumProject(@RequestParam projectId: Int,
+                           @RequestParam projectName: String?,
+                           @RequestParam teamId: Int?,
+                           @RequestParam colTitle: MutableList<String>?,
+                           @RequestParam rowTitle: MutableList<String>?,
+                           @RequestParam iteration: Int? = 14): Message {
+        val updateScrumProject = ScrumProject(projectName = projectName, teamId = teamId)
+        updateScrumProject.id = projectId
+        updateScrumProject.colTitle = colTitle
+        updateScrumProject.rowTitle = rowTitle
+        updateScrumProject.iteration = iteration
+
+        return scrumProjectService.updateScrumProject(updateScrumProject)
+    }
+
+    @PostMapping("/scrum_project/remove")
+    fun removeScrumProject(@RequestParam projectId: Int): Message {
+
+        return scrumProjectService.removeScrumProject(projectId)
+    }
 }
