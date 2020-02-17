@@ -39,6 +39,7 @@ dependencies {
     // datasource
     implementation("org.postgresql:postgresql:42.2.5")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.vladmihalcea:hibernate-types-52:2.9.3")
 //    implementation("org.springframework.data:spring-data-redis")
 //    implementation("redis.clients:jedis")
 
