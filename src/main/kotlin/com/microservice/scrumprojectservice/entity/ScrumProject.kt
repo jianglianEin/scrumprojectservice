@@ -1,11 +1,12 @@
 package com.microservice.scrumprojectservice.entity
 
 
-import com.vladmihalcea.hibernate.type.array.IntArrayType
-import com.vladmihalcea.hibernate.type.array.StringArrayType
+
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
 import org.hibernate.annotations.TypeDefs
+import cast_jpa_array_to_postgresql_array.IntArrayType
+import cast_jpa_array_to_postgresql_array.StringArrayType
 import javax.persistence.*
 
 
@@ -31,12 +32,12 @@ class ScrumProject() {
     var createTime: String? = null
 
     @Type( type = "string-array" )
-    @Column(name = "col", columnDefinition = "varchar(50)[]")
-    var colTitle: MutableList<String>? = null
+    @Column(name = "col", columnDefinition = "text[]")
+    var colTitle: ArrayList<String>? = null
 
     @Type( type = "string-array" )
-    @Column(name = "row", columnDefinition = "varchar(50)[]")
-    var rowTitle: MutableList<String>? = null
+    @Column(name = "row", columnDefinition = "text[]")
+    var rowTitle: ArrayList<String>? = null
 
     @Column(name = "iteration")
     var iteration: Int? = 14

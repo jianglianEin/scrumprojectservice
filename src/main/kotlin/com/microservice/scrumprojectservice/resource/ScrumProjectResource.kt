@@ -37,8 +37,8 @@ class ScrumProjectResource {
     fun updateScrumProject(@RequestParam projectId: Int,
                            @RequestParam projectName: String?,
                            @RequestParam teamId: Int?,
-                           @RequestParam colTitle: MutableList<String>?,
-                           @RequestParam rowTitle: MutableList<String>?,
+                           @RequestParam colTitle: ArrayList<String>?,
+                           @RequestParam rowTitle: ArrayList<String>?,
                            @RequestParam iteration: Int? = 14): Message {
         val updateScrumProject = ScrumProject(projectName = projectName, teamId = teamId)
         updateScrumProject.id = projectId

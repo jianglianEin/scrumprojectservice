@@ -23,13 +23,12 @@ class ScrumProjectService {
         val oldProjectOption = scrumProjectRepository.findById(updateScrumProject.id!!)
         if (oldProjectOption.isPresent) {
             val oldProject = oldProjectOption.get()
-            when {
-                updateScrumProject.projectName != null -> oldProject.projectName = updateScrumProject.projectName
-                updateScrumProject.teamId != null -> oldProject.teamId = updateScrumProject.teamId
-                updateScrumProject.colTitle != null -> oldProject.colTitle = updateScrumProject.colTitle
-                updateScrumProject.rowTitle != null -> oldProject.rowTitle = updateScrumProject.rowTitle
-                updateScrumProject.iteration != null -> oldProject.iteration = updateScrumProject.iteration
-            }
+            if (updateScrumProject.projectName != null) oldProject.projectName = updateScrumProject.projectName
+            if (updateScrumProject.teamId != null) oldProject.teamId = updateScrumProject.teamId
+            if (updateScrumProject.colTitle != null) oldProject.colTitle = updateScrumProject.colTitle
+            if (updateScrumProject.rowTitle != null) oldProject.rowTitle = updateScrumProject.rowTitle
+            if (updateScrumProject.iteration != null) oldProject.iteration = updateScrumProject.iteration
+
             val savedScrumProject = scrumProjectRepository.save(oldProject)
             return Message(true, savedScrumProject)
 

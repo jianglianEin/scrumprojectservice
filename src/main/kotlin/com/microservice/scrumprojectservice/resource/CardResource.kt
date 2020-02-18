@@ -20,10 +20,11 @@ class CardResource {
                    @RequestParam priority: String?,
                    @RequestParam processor: String?,
                    @RequestParam founder: String,
-                   @RequestParam status: String): Message {
+                   @RequestParam status: String,
+                   @RequestParam boardId: Int): Message {
         val newCard = Card(title, description, storyPoints, priority, processor, founder, status)
 
-        return cardService.createCard(newCard)
+        return cardService.createCard(newCard, boardId)
     }
 
     @PostMapping("/card/update")

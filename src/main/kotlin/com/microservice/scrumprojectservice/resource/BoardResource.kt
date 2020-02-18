@@ -1,12 +1,8 @@
 package com.microservice.scrumprojectservice.resource
 
-import com.microservice.scrumprojectservice.config.EnvProperties
 import com.microservice.scrumprojectservice.dto.Message
-import com.microservice.scrumprojectservice.entity.ScrumProject
 import com.microservice.scrumprojectservice.service.BoardService
-import com.microservice.scrumprojectservice.service.ScrumProjectService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -17,9 +13,9 @@ class BoardResource {
     private lateinit var boardService: BoardService
 
     @PostMapping("/board/create")
-    fun createScrumProject(): Message {
+    fun createBoard(@RequestParam projectId: Int): Message {
 
-        return boardService.createBoard()
+        return boardService.createBoard(projectId)
     }
 
     @PostMapping("/board/remove")
