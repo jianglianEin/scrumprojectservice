@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CardBoardRelationRepository: JpaRepository<CardBoardRelation, Int> {
+    fun findAllByBoardId(boardId: Int): MutableList<CardBoardRelation>
 }

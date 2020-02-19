@@ -5,6 +5,8 @@ import com.microservice.scrumprojectservice.entity.Board
 import com.microservice.scrumprojectservice.entity.BoardProjectRelation
 import com.microservice.scrumprojectservice.repostiry.BoardProjectRelationRepository
 import com.microservice.scrumprojectservice.repostiry.BoardRepository
+import com.microservice.scrumprojectservice.repostiry.CardBoardRelationRepository
+import com.microservice.scrumprojectservice.repostiry.CardRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -14,6 +16,10 @@ class BoardService {
     private lateinit var boardRepository: BoardRepository
     @Autowired
     private lateinit var boardProjectRelationRepository: BoardProjectRelationRepository
+    @Autowired
+    private lateinit var cardBoardRelationRepository: CardBoardRelationRepository
+    @Autowired
+    private lateinit var cardRepository: CardRepository
 
     fun createBoard(projectId: Int): Message {
         val createTime = System.currentTimeMillis().toString()
@@ -28,6 +34,11 @@ class BoardService {
 
 
     fun removeBoard(boardId: Int): Message {
+        val deleteCardBoardList = cardBoardRelationRepository.findAllByBoardId(boardId)
+        for (deleteCardBoard in deleteCardBoardList) {
+            cardRepository.deleteById(deleteCardBoard.cardId!!)
+        }
+
         boardRepository.deleteById(boardId)
         return Message(true, "board remove success")
     }
