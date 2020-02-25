@@ -3,7 +3,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: jianglianein
     password: ft1998226
-    url: jdbc:postgresql://45.32.133.122:54323/scrumproject
+    url: jdbc:postgresql://45.32.133.122:5432/scrumproject
   application:
     name: scrum-project-service-API
 

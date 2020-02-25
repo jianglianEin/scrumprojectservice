@@ -112,7 +112,7 @@ tasks.build {
 }
 
 tasks.bootRun {
-    val env = System.getProperty("app.env") ?: "local"
+    val env = "dev"
     System.out.println(env)
     systemProperty("spring.profiles.active", env)
 }
