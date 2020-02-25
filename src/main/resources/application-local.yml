@@ -8,3 +8,8 @@ spring:
     name: scrum-project-service-API
 
 env: "local"
+
+server:
+  #端口号
+  port: 8001
+  address: 10.144.78.161

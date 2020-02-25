@@ -1,0 +1,6 @@
+---
+applications:
+  - name: scrumprojectservice
+    memory: 666M
+    buildpack: java_buildpack
+    path: build/libs/scrumprojectservice-0.0.1-SNAPSHOT.jar
