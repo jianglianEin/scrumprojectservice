@@ -54,4 +54,9 @@ class ScrumProjectResource {
 
         return scrumProjectService.removeScrumProject(projectId)
     }
+
+    @PostMapping("/scrum_project/selectByCreator")
+    fun selectProjectByCreator(@RequestParam creator: String): MutableList<ScrumProject> {
+        return scrumProjectService.selectProjectByCreator(creator)
+    }
 }

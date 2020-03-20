@@ -57,4 +57,10 @@ class ScrumProjectService {
         scrumProjectRepository.deleteById(projectId)
         return Message(true, "project remove success")
     }
+
+    fun selectProjectByCreator(creator: String): MutableList<ScrumProject> {
+        val projectList = scrumProjectRepository.findAllByCreator(creator)
+
+        return projectList
+    }
 }
