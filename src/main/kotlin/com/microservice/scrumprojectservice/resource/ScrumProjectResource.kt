@@ -26,7 +26,7 @@ class ScrumProjectResource {
 
     @PostMapping("/scrum_project/create")
     fun createScrumProject(@RequestParam projectName: String,
-                           @RequestParam teamId: Int?,
+                           @RequestParam teamId: String?,
                            @RequestParam creator: String): Message {
         val newScrumProject = ScrumProject(projectName, teamId, creator)
 
@@ -36,7 +36,7 @@ class ScrumProjectResource {
     @PostMapping("/scrum_project/update")
     fun updateScrumProject(@RequestParam projectId: Int,
                            @RequestParam projectName: String?,
-                           @RequestParam teamId: Int?,
+                           @RequestParam teamId: String?,
                            @RequestParam colTitle: ArrayList<String>?,
                            @RequestParam rowTitle: ArrayList<String>?,
                            @RequestParam iteration: Int? = 14): Message {

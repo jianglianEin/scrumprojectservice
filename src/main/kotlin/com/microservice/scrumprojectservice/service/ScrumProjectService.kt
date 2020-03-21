@@ -23,8 +23,8 @@ class ScrumProjectService {
         val updateTime = System.currentTimeMillis().toString()
         newScrumProject.createTime = updateTime
 
-        val savedScrumProject = scrumProjectRepository.save(newScrumProject)
-        return Message(true, savedScrumProject)
+       scrumProjectRepository.save(newScrumProject)
+        return Message(true, "project create success")
 }
 
     fun updateScrumProject(updateScrumProject: ScrumProject): Message {
@@ -37,8 +37,8 @@ class ScrumProjectService {
             if (updateScrumProject.rowTitle != null) oldProject.rowTitle = updateScrumProject.rowTitle
             if (updateScrumProject.iteration != null) oldProject.iteration = updateScrumProject.iteration
 
-            val savedScrumProject = scrumProjectRepository.save(oldProject)
-            return Message(true, savedScrumProject)
+            scrumProjectRepository.save(oldProject)
+            return Message(true, "project update success")
 
         }
         return Message(false, "no this project")

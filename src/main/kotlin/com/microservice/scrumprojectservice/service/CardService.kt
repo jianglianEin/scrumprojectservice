@@ -22,7 +22,7 @@ class CardService {
         val savedCard = cardRepository.save(newCard)
         val newCardBoardRelation = CardBoardRelation(savedCard.id, boardId)
         cardBoardRelationRepository.save(newCardBoardRelation)
-        return Message(true, savedCard)
+        return Message(true, "card create success")
     }
 
     fun updateCard(updateCard: Card): Message {
@@ -37,8 +37,8 @@ class CardService {
             if (updateCard.processor != null) oldCard.processor = updateCard.processor
             if (updateCard.status != null) oldCard.status = updateCard.status
 
-            val savedCard = cardRepository.save(oldCard)
-            return Message(true, savedCard)
+            cardRepository.save(oldCard)
+            return Message(true, "card update success")
 
         }
         return Message(false, "no this card")

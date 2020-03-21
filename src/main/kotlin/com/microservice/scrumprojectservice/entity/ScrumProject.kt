@@ -26,7 +26,7 @@ class ScrumProject() {
     var creator: String? = null
 
     @Column(name = "team_id")
-    var teamId: Int? = null
+    var teamId: String? = null
 
     @Column(name = "create_time")
     var createTime: String? = null
@@ -43,7 +43,7 @@ class ScrumProject() {
     var iteration: Int? = 14
 
     constructor(projectName: String? = null,
-                teamId: Int? = null,
+                teamId: String? = null,
                 creator: String? = null,
                 createTime: String? = null) : this() {
         this.projectName = projectName

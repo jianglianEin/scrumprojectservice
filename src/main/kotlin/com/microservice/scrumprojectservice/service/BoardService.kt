@@ -29,7 +29,7 @@ class BoardService {
         val savedBoard = boardRepository.save(newBoard)
         val newBoardProjectRelation = BoardProjectRelation(projectId, savedBoard.id)
         boardProjectRelationRepository.save(newBoardProjectRelation)
-        return Message(true, savedBoard)
+        return Message(true, "board creat success")
 }
 
 
