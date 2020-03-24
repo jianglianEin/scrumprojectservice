@@ -46,8 +46,10 @@ class ScrumProjectResource {
                            @RequestParam colTitle: ArrayList<String>?,
                            @RequestParam rowTitle: ArrayList<String>?,
                            @RequestParam iteration: Int? = 14): Message {
-        val updateScrumProject = ScrumProject(projectName = projectName, teamId = teamId)
+        val updateScrumProject = ScrumProject()
         updateScrumProject.id = projectId
+        updateScrumProject.projectName = projectName
+        updateScrumProject.teamId = teamId
         updateScrumProject.colTitle = colTitle
         updateScrumProject.rowTitle = rowTitle
         updateScrumProject.iteration = iteration

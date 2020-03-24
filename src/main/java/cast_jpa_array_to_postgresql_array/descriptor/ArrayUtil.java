@@ -46,12 +46,12 @@ public class ArrayUtil {
             char[] array = (char[]) originalArray;
             return (T) Arrays.copyOf(array, array.length);
         } else if (originalArray.getClass().equals(ArrayList.class)){
-            for (int i = 0; i < ((ArrayList) originalArray).toArray().length; i++){
-                String data = (String) ((ArrayList) originalArray).get(i);
-                data = data.replace("{", "");
-                data = data.replace("}", "");
-                ((ArrayList) originalArray).set(i, data);
-            }
+//            for (int i = 0; i < ((ArrayList) originalArray).toArray().length; i++){
+//                String data = (String) ((ArrayList) originalArray).get(i);
+//                data = data.replace("{", "");
+//                data = data.replace("}", "");
+//                ((ArrayList) originalArray).set(i, data);
+//            }
             Object[] array = ((ArrayList) originalArray).toArray();
             return (T) Arrays.copyOf(array, array.length);
         }else {
