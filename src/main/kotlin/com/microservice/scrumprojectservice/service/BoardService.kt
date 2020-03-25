@@ -9,6 +9,7 @@ import com.microservice.scrumprojectservice.repostiry.CardBoardRelationRepositor
 import com.microservice.scrumprojectservice.repostiry.CardRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class BoardService {
@@ -21,6 +22,7 @@ class BoardService {
     @Autowired
     private lateinit var cardRepository: CardRepository
 
+    @Transactional
     fun createBoard(projectId: Int): Message {
         val createTime = System.currentTimeMillis().toString()
         val newBoard = Board()
