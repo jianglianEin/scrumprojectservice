@@ -44,4 +44,17 @@ class BoardService {
         boardRepository.deleteById(boardId)
         return Message(true, "board remove success")
     }
+
+    fun selectBoardsByProject(projectId: Int): MutableList<Board> {
+        val boardProjectRelationList = boardProjectRelationRepository.findAllByProjectId(projectId)
+        val boardList = mutableListOf<Board>()
+
+        boardProjectRelationList.map {
+            val boardOptional = boardRepository.findById(it.boardId!!)
+            if (boardOptional.isPresent) {
+                boardList.add(boardOptional.get())
+            }
+        }
+        return boardList
+    }
 }

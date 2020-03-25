@@ -1,6 +1,7 @@
 package com.microservice.scrumprojectservice.resource
 
 import com.microservice.scrumprojectservice.dto.Message
+import com.microservice.scrumprojectservice.entity.Board
 import com.microservice.scrumprojectservice.service.BoardService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
@@ -22,5 +23,11 @@ class BoardResource {
     fun removeBoard(@RequestParam boardId: Int): Message {
 
         return boardService.removeBoard(boardId)
+    }
+
+    @PostMapping("/board/selectByProject")
+    fun selectBoardsByProject(@RequestParam projectId: Int): MutableList<Board> {
+
+        return boardService.selectBoardsByProject(projectId)
     }
 }
