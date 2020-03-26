@@ -48,4 +48,17 @@ class CardService {
         cardRepository.deleteById(cardId)
         return Message(true, "card remove success")
     }
+
+    fun selectCardsByBoard(boardId: Int): MutableList<Card> {
+        val cardBoardRelationList = cardBoardRelationRepository.findAllByBoardId(boardId)
+        val cardList = mutableListOf<Card>()
+
+        cardBoardRelationList.map {
+            val cardOptional = cardRepository.findById(it.cardId!!)
+            if (cardOptional.isPresent) {
+                cardList.add(cardOptional.get())
+            }
+        }
+        return cardList
+    }
 }

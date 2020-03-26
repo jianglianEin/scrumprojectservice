@@ -47,4 +47,10 @@ class CardResource {
 
         return cardService.removeCard(cardId)
     }
+
+    @PostMapping("/card/selectByBoard")
+    fun selectCardsByBoard(@RequestParam boardId: Int): MutableList<Card> {
+
+        return cardService.selectCardsByBoard(boardId)
+    }
 }
