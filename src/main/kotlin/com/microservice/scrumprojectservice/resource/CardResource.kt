@@ -21,7 +21,7 @@ class CardResource {
                    @RequestParam processor: String?,
                    @RequestParam founder: String,
                    @RequestParam status: String,
-                   @RequestParam boardId: Int): Message {
+                   @RequestParam boardId: Int): Card {
         val newCard = Card(title, description, storyPoints, priority, processor, founder, status)
 
         return cardService.createCard(newCard, boardId)
@@ -34,7 +34,7 @@ class CardResource {
                    @RequestParam storyPoints: Int?,
                    @RequestParam priority: String?,
                    @RequestParam processor: String?,
-                   @RequestParam status: String?): Message {
+                   @RequestParam status: String?): Card {
         val updateCard = Card(title = title, description = description, storyPoints = storyPoints,
                 priority = priority, processor = processor, status = status)
         updateCard.id = cardId

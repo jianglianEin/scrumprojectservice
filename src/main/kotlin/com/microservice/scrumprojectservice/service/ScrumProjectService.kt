@@ -3,6 +3,7 @@ package com.microservice.scrumprojectservice.service
 import com.microservice.scrumprojectservice.dto.Message
 import com.microservice.scrumprojectservice.entity.ScrumProject
 import com.microservice.scrumprojectservice.repostiry.*
+import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -19,15 +20,17 @@ class ScrumProjectService {
     @Autowired
     private lateinit var cardRepository: CardRepository
 
-    fun createScrumProject(newScrumProject: ScrumProject): Message {
+    private var logger = KotlinLogging.logger {}
+
+    fun createScrumProject(newScrumProject: ScrumProject): ScrumProject {
         val updateTime = System.currentTimeMillis().toString()
         newScrumProject.createTime = updateTime
+        logger.info { "project create...." }
 
-       scrumProjectRepository.save(newScrumProject)
-        return Message(true, "project create success")
+        return scrumProjectRepository.save(newScrumProject)
 }
 
-    fun updateScrumProject(updateScrumProject: ScrumProject): Message {
+    fun updateScrumProject(updateScrumProject: ScrumProject): ScrumProject {
         val oldProjectOption = scrumProjectRepository.findById(updateScrumProject.id!!)
         if (oldProjectOption.isPresent) {
             val oldProject = oldProjectOption.get()
@@ -37,11 +40,12 @@ class ScrumProjectService {
             if (updateScrumProject.rowTitle != null) oldProject.rowTitle = updateScrumProject.rowTitle
             if (updateScrumProject.iteration != null) oldProject.iteration = updateScrumProject.iteration
 
-            scrumProjectRepository.save(oldProject)
-            return Message(true, "project update success")
-
+            logger.info { "project updating ...." }
+            return scrumProjectRepository.save(oldProject)
         }
-        return Message(false, "no this project")
+
+        logger.warn { "no this project" }
+        return ScrumProject()
     }
 
     fun removeScrumProject(projectId: Int): Message {

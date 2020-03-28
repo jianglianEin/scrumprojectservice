@@ -5,6 +5,7 @@ import com.microservice.scrumprojectservice.entity.Card
 import com.microservice.scrumprojectservice.entity.CardBoardRelation
 import com.microservice.scrumprojectservice.repostiry.CardBoardRelationRepository
 import com.microservice.scrumprojectservice.repostiry.CardRepository
+import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -15,17 +16,21 @@ class CardService {
     @Autowired
     private lateinit var cardBoardRelationRepository: CardBoardRelationRepository
 
-    fun createCard(newCard: Card, boardId: Int): Message {
+    private var logger = KotlinLogging.logger {}
+
+    fun createCard(newCard: Card, boardId: Int): Card {
         val updateTime = System.currentTimeMillis().toString()
         newCard.createTime = updateTime
 
         val savedCard = cardRepository.save(newCard)
         val newCardBoardRelation = CardBoardRelation(savedCard.id, boardId)
         cardBoardRelationRepository.save(newCardBoardRelation)
-        return Message(true, "card create success")
+
+        logger.info { "card create success" }
+        return savedCard
     }
 
-    fun updateCard(updateCard: Card): Message {
+    fun updateCard(updateCard: Card): Card {
         val oldCardOption = cardRepository.findById(updateCard.id!!)
         if (oldCardOption.isPresent) {
             val oldCard = oldCardOption.get()
@@ -37,11 +42,13 @@ class CardService {
             if (updateCard.processor != null) oldCard.processor = updateCard.processor
             if (updateCard.status != null) oldCard.status = updateCard.status
 
-            cardRepository.save(oldCard)
-            return Message(true, "card update success")
+            logger.info { "card updating..." }
 
+            return cardRepository.save(oldCard)
         }
-        return Message(false, "no this card")
+
+        logger.warn { "no this card" }
+        return Card()
     }
 
     fun removeCard(cardId: Int): Message {

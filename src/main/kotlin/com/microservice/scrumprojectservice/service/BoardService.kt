@@ -7,6 +7,7 @@ import com.microservice.scrumprojectservice.repostiry.BoardProjectRelationReposi
 import com.microservice.scrumprojectservice.repostiry.BoardRepository
 import com.microservice.scrumprojectservice.repostiry.CardBoardRelationRepository
 import com.microservice.scrumprojectservice.repostiry.CardRepository
+import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -22,8 +23,10 @@ class BoardService {
     @Autowired
     private lateinit var cardRepository: CardRepository
 
+    private var logger = KotlinLogging.logger {}
+
     @Transactional
-    fun createBoard(projectId: Int): Message {
+    fun createBoard(projectId: Int): Board {
         val createTime = System.currentTimeMillis().toString()
         val newBoard = Board()
         newBoard.createTime = createTime
@@ -31,7 +34,10 @@ class BoardService {
         val savedBoard = boardRepository.save(newBoard)
         val newBoardProjectRelation = BoardProjectRelation(projectId, savedBoard.id)
         boardProjectRelationRepository.save(newBoardProjectRelation)
-        return Message(true, "board creat success")
+
+        logger.info { "board create success" }
+
+        return savedBoard
 }
 
 

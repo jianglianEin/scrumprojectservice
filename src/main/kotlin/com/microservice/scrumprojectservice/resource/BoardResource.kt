@@ -14,7 +14,7 @@ class BoardResource {
     private lateinit var boardService: BoardService
 
     @PostMapping("/board/create")
-    fun createBoard(@RequestParam projectId: Int): Message {
+    fun createBoard(@RequestParam projectId: Int): Board {
 
         return boardService.createBoard(projectId)
     }
