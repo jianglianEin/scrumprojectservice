@@ -3,6 +3,8 @@ package com.microservice.scrumprojectservice.service
 import com.microservice.scrumprojectservice.dto.Message
 import com.microservice.scrumprojectservice.entity.Card
 import com.microservice.scrumprojectservice.entity.CardBoardRelation
+import com.microservice.scrumprojectservice.entity.CardPos
+import com.microservice.scrumprojectservice.repostiry.BoardProjectRelationRepository
 import com.microservice.scrumprojectservice.repostiry.CardBoardRelationRepository
 import com.microservice.scrumprojectservice.repostiry.CardRepository
 import mu.KotlinLogging
@@ -15,6 +17,8 @@ class CardService {
     private lateinit var cardRepository: CardRepository
     @Autowired
     private lateinit var cardBoardRelationRepository: CardBoardRelationRepository
+    @Autowired
+    private lateinit var boardProjectRelationRepository: BoardProjectRelationRepository
 
     private var logger = KotlinLogging.logger {}
 
@@ -67,5 +71,14 @@ class CardService {
             }
         }
         return cardList
+    }
+
+    fun selectCardPosById(cardId: Int): CardPos {
+        val cardBoardRelation = cardBoardRelationRepository.findByCardId(cardId)
+        val boardProjectRelation = boardProjectRelationRepository.findByBoardId(cardBoardRelation.boardId!!)
+
+        return CardPos(cardId = cardId.toString(),
+                boardId = cardBoardRelation.boardId.toString(),
+                projectId = boardProjectRelation.projectId.toString())
     }
 }

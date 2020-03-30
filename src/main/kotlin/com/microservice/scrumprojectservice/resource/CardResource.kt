@@ -2,6 +2,7 @@ package com.microservice.scrumprojectservice.resource
 
 import com.microservice.scrumprojectservice.dto.Message
 import com.microservice.scrumprojectservice.entity.Card
+import com.microservice.scrumprojectservice.entity.CardPos
 import com.microservice.scrumprojectservice.service.CardService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
@@ -52,5 +53,11 @@ class CardResource {
     fun selectCardsByBoard(@RequestParam boardId: Int): MutableList<Card> {
 
         return cardService.selectCardsByBoard(boardId)
+    }
+
+    @PostMapping("/card/selectCardPosById")
+    fun selectCardPosById(@RequestParam cardId: Int): CardPos {
+
+        return cardService.selectCardPosById(cardId)
     }
 }

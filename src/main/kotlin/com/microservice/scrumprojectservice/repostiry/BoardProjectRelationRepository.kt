@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BoardProjectRelationRepository: JpaRepository<BoardProjectRelation, Int> {
     fun findAllByProjectId(projectId: Int): MutableList<BoardProjectRelation>
+    fun findByBoardId(boardId: Int): BoardProjectRelation
 }
