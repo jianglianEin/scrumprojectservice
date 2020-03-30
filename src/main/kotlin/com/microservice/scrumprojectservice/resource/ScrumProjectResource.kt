@@ -67,4 +67,9 @@ class ScrumProjectResource {
     fun selectProjectByCreator(@RequestParam creator: String): MutableList<ScrumProject> {
         return scrumProjectService.selectProjectByCreator(creator)
     }
+
+    @PostMapping("/scrum_project/selectById")
+    fun selectProjectById(@RequestParam projectId: Int): ScrumProject {
+        return scrumProjectService.selectProjectById(projectId)
+    }
 }

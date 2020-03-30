@@ -67,4 +67,12 @@ class ScrumProjectService {
 
         return projectList
     }
+
+    fun selectProjectById(projectId: Int): ScrumProject {
+        val projectOptional = scrumProjectRepository.findById(projectId)
+        if (projectOptional.isPresent){
+            return projectOptional.get()
+        }
+        return ScrumProject()
+    }
 }
