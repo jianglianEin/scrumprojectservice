@@ -75,4 +75,8 @@ class ScrumProjectService {
         }
         return ScrumProject()
     }
+
+    fun selectProjectByTeamId(teamId: String): MutableList<ScrumProject> {
+        return scrumProjectRepository.findAllByTeamId(teamId)
+    }
 }
