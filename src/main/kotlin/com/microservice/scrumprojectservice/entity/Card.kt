@@ -34,6 +34,9 @@ class Card() {
     @Column(name = "create_time")
     var createTime: String? = null
 
+    @Column(name = "number")
+    var number: Int? = null
+
     constructor(title: String? = null,
                 description: String? = null,
                 storyPoints: Int? = null,
@@ -41,7 +44,8 @@ class Card() {
                 processor: String? = null,
                 founder: String? = null,
                 status: String? = null,
-                createTime: String? = null) : this() {
+                createTime: String? = null,
+                number: Int? = null) : this() {
         if (processor.isNullOrBlank() && processor.isNullOrEmpty()){
             this.processor = null
         }else {
@@ -55,5 +59,6 @@ class Card() {
         this.founder = founder
         this.status = status
         this.createTime = createTime
+        this.number = number
     }
 }

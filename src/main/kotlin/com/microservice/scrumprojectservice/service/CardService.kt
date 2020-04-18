@@ -26,12 +26,45 @@ class CardService {
         val updateTime = System.currentTimeMillis().toString()
         newCard.createTime = updateTime
 
+        val numberList = getCardNumberList(boardId).sortedBy { it }
+
+        if (numberList.isNotEmpty()){
+            newCard.number = numberList.last()!! + 1
+        }else {
+            newCard.number = 1
+        }
+
         val savedCard = cardRepository.save(newCard)
         val newCardBoardRelation = CardBoardRelation(savedCard.id, boardId)
         cardBoardRelationRepository.save(newCardBoardRelation)
 
         logger.info { "card create success" }
         return savedCard
+    }
+
+    private fun getCardNumberList(boardId: Int): List<Int?> {
+        val projectId = boardProjectRelationRepository.findByBoardId(boardId).projectId
+        val boardIdList = boardProjectRelationRepository.findAllByProjectId(projectId!!).map {
+            it.boardId
+        }
+        val cardIdList = mutableListOf<Int>()
+        boardIdList.forEach { boardInList ->
+            if (boardInList != null) {
+                cardBoardRelationRepository.findAllByBoardId(boardInList).forEach {
+                    cardIdList.add(it.cardId!!)
+                }
+            }
+        }
+
+        val cardList = mutableListOf<Card>()
+        cardIdList.forEach {
+            val cardOptional = cardRepository.findById(it)
+            if (cardOptional.isPresent) {
+                cardList.add(cardOptional.get())
+            }
+        }
+
+        return cardList.map { it.number }
     }
 
     fun updateCard(updateCard: Card): Card {
