@@ -35,12 +35,13 @@ class CardResource {
                    @RequestParam storyPoints: Int?,
                    @RequestParam priority: String?,
                    @RequestParam processor: String?,
-                   @RequestParam status: String?): Card {
+                   @RequestParam status: String?,
+                   @RequestParam boardId: Int?): Card {
         val updateCard = Card(title = title, description = description, storyPoints = storyPoints,
                 priority = priority, processor = processor, status = status)
         updateCard.id = cardId
 
-        return cardService.updateCard(updateCard)
+        return cardService.updateCard(updateCard, boardId)
     }
 
     @PostMapping("/card/remove")

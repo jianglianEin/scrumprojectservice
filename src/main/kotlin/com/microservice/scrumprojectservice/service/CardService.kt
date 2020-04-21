@@ -67,7 +67,7 @@ class CardService {
         return cardList.map { it.number }
     }
 
-    fun updateCard(updateCard: Card): Card {
+    fun updateCard(updateCard: Card, boardId: Int?): Card {
         val oldCardOption = cardRepository.findById(updateCard.id!!)
         if (oldCardOption.isPresent) {
             val oldCard = oldCardOption.get()
@@ -78,6 +78,12 @@ class CardService {
             if (updateCard.priority != null) oldCard.priority = updateCard.priority
             if (updateCard.processor != null) oldCard.processor = updateCard.processor
             if (updateCard.status != null) oldCard.status = updateCard.status
+
+            if (boardId != null){
+                val oldCardBoardRelation = cardBoardRelationRepository.findByCardId(cardId = oldCard.id!!)
+                oldCardBoardRelation.boardId = boardId
+                cardBoardRelationRepository.save(oldCardBoardRelation)
+            }
 
             logger.info { "card updating..." }
 
