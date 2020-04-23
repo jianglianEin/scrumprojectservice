@@ -46,11 +46,6 @@ class Card() {
                 status: String? = null,
                 createTime: String? = null,
                 number: Int? = null) : this() {
-        if (processor.isNullOrBlank() && processor.isNullOrEmpty()){
-            this.processor = null
-        }else {
-            this.processor = processor
-        }
 
         this.title = title
         this.description = description
@@ -60,5 +55,6 @@ class Card() {
         this.status = status
         this.createTime = createTime
         this.number = number
+        this.processor = processor
     }
 }
