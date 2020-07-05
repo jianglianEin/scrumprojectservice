@@ -1,14 +1,13 @@
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    username: jianglianein
-    password: ft1998226
-    url: jdbc:postgresql://45.32.133.122:5432/scrumproject
+    driver-class-name:
+    username:
+    password:
+    url:
   application:
     name: scrum-project-service-API
 
 env: "dev"
 
 server:
-  #端口号
-  port: 8001
+  port:
