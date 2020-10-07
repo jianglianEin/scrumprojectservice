@@ -31,30 +31,8 @@ class AuthResource {
             }
         }
 
-        val boardIdList = mutableListOf<String>()
-        for (projectId in projectIdList) {
-            val boards = boardService.selectBoardsByProject(projectId.toInt())
-            for (board in boards) {
-                if (!boardIdList.contains(board.id.toString())) {
-                    boardIdList.add(board.id.toString())
-                }
-            }
-        }
-
-        val cardIdList = mutableListOf<String>()
-        for (boardId in boardIdList) {
-            val cards = cardService.selectCardsByBoard(boardId.toInt())
-            for (card in cards) {
-                if (!cardIdList.contains(card.id.toString())) {
-                    cardIdList.add(card.id.toString())
-                }
-            }
-        }
-
         val projectServiceClaimMap = mutableMapOf<String, List<String>>()
         projectServiceClaimMap["projects"] = projectIdList
-        projectServiceClaimMap["boards"] = boardIdList
-        projectServiceClaimMap["cards"] = cardIdList
 
         return projectServiceClaimMap
     }
